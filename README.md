@@ -1,5 +1,5 @@
 # Csv2itaca
-Este programa está diseñado para facilitar la transferencia automática de calificaciones y observaciones desde un archivo CSV a la plataforma docente de Ítaca.
+Este programa es una herramienta para facilitar la transferencia automática de calificaciones y observaciones a la plataforma docente de Ítaca. Para ello, crea un botón debajo del nombre del grupo que permite importar los datos en un archivo CSV a la plataforma.
 
 # Uso
 No es necesaria su instalación. Para ejecutarlo simplemente se debe de copiar el código en la consola.
