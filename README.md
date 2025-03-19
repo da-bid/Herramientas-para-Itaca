@@ -10,10 +10,10 @@ No es necesaria su instalación. Para ejecutarlo simplemente se debe de copiar e
 5. Pegamos el código y lo ejecutamos.
 6. Aparecerá un botón arriba que nos pedirá un CSV.
 
-El formato del CSV debe de ser `Nota; Observación` y no tener cabecera. Por ejemplo:
+El formato del CSV debe de ser `Nota; Observación`, sin cabecera. Además, se debe utilizar "\n" para poner un salto de línea. Por ejemplo:
 |   |   |
 |---|---|
-|5;| Observación1|
+|5;| Observación\n1|
 |6;| Observación2|
 |7;| Observación3|
 
