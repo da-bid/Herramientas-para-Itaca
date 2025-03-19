@@ -12,11 +12,12 @@ No es necesaria su instalación. Para ejecutarlo simplemente se debe de copiar e
    En Firefox: hacemos click en Run.
 7. Aparecerá un botón arriba que nos pedirá un CSV.
 
-El formato del CSV debe de ser `Nota; Observación`, sin cabecera. Además, se debe utilizar `\n` para poner un salto de línea. Por ejemplo:
-|   |   |
-|---|---|
-|5;| Observación\n1|
-|6;| Observación2|
-|7;| Observación3|
+# Formato del archivo CSV
+- El formato del archivo CSV debe de ser `Nota; Observación`.
+- No debe tener cabecera con títulos.
+- Se debe utilizar `\n` para poner un salto de línea.
+- No se puede utilizar punto y coma (;).
+
+Se puede consultar el ejemplo haciendo [click aquí.](/Ejemplo.csv)
 
 
