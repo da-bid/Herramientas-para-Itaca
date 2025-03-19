@@ -1,11 +1,11 @@
-/*
-Nombre del programa: csv2itaca
-Versión: 1.2.0
-Autor: David Palazón.
-Repositorio: https://github.com/da-bid/csv2itaca
-
-Este software se proporciona "tal cual", sin garantías de ningún tipo. Para más detalles,
-consulta la licencia GPLv3 en https://www.gnu.org/licenses/gpl-3.0.html.
+/**
+ * Nombre del programa: csv2itaca
+ * Versión: 1.2.2
+ * Autor: David Palazón.
+ * Repositorio: https://github.com/da-bid/csv2itaca
+ * 
+ * Este software se proporciona "tal cual", sin garantías de ningún tipo. Para más detalles,
+ * consulta la licencia GPLv3 en https://www.gnu.org/licenses/gpl-3.0.html.
  */
 
 function querySelectorByXPath(xpath) {
@@ -13,18 +13,17 @@ function querySelectorByXPath(xpath) {
   return result.singleNodeValue;
 }
 
-/*Si no hay menú lo creamos.*/
+/*Si no hay menú lo creamos*/
 if (!document.getElementById("csvFileInput")){
-//Buscamos el header
-element = querySelectorByXPath('//section[@id="imc-seccio-avaluacio"]/div/div[@class="imc-contingut-carregat"]');
-header = element.querySelector("header");
+  /*Buscamos el header*/
+  element = querySelectorByXPath('//section[@id="imc-seccio-avaluacio"]/div/div[@class="imc-contingut-carregat"]');
+  header = element.querySelector("header");
 
-/* Agregar botón de cargar CSV */
-container = document.createElement("div");
-container.style="background: hsla(195, 79.9%, 48.8%);"
-container.id="csvnotasloader"
-container.innerHTML = `<p>Sube un archivo CSV con las notas: <input type="file" id="csvFileInput" accept=".csv"></p>`;
-header.appendChild(container);
+  /*Agregar botón de cargar CSV*/
+  container = document.createElement("div");
+  container.style="background: hsla(195, 79.9%, 48.8%);"
+  container.innerHTML = `<p>Sube un archivo CSV con las notas: <input type="file" id="csvFileInput" accept=".csv"></p>`;
+  header.appendChild(container);
 }
 
 /*Leemos el CSV*/
@@ -38,13 +37,14 @@ document.getElementById('csvFileInput').addEventListener('change', function(even
     const data = text.split('\n').map(row => row.split(';'));
     document.getElementById('csvFileInput').value=null;
     
-    /* Capturamos los botones*/
+    /*Capturamos los botones*/
     const notasArr = document.querySelectorAll("input.imc-f-qu-camp");
     const obsArr = document.querySelectorAll("a.imc-bt-observacions");
     let final;
     
     /*Volcamos los datos */
     for (i = 0; i < data.length && i<obsArr.length; i++) {
+      /*Escribimos la nota */
       notasArr[i].value = data[i][0];
       obsArr[i].click()
       document.querySelector("textarea.imc-f-observacions-avanzada").value = String(data[i][1]).replace(/\\n/g, '\n');
