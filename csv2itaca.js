@@ -70,7 +70,7 @@ function _createmenu(){
     let container = document.createElement("div");
     container.style="background: hsla(195, 79.9%, 48.8%);"
     container.id="menunotas"
-    container.innerHTML = `<p>Sube un archivo CSV con las notas: <input type="file" id="csvFileInput" accept=".csv"> List alumnos <button id="getalumnosbutton">Listado de alumnos</button></p>`;
+    container.innerHTML = `<p>Archivo CSV con notas y observaciones: <input type="file" id="csvFileInput" accept=".csv"> <button id="getalumnosbutton">Listado de alumnos</button></p>`;
     element = querySelectorByXPath('//section[@id="imc-seccio-avaluacio"]/div/div[@class="imc-contingut-carregat"]');
     header = element.querySelector("header");
     header.appendChild(container);
