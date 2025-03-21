@@ -19,7 +19,7 @@ No es necesaria su instalación. Para ejecutarlo simplemente se debe de copiar e
 
 ### Tipos de archivos aceptados
 Se aceptan los siguientes archivos (hay un ejemplo de cada uno subido [aquí](/tree/main/CSV%20Ejemplo).
-- `Nota;Observación;Apellido1 Apellido2 Nombre` (recomendado: el nombre sólo se utiliza para verificar si hay un error).
+- `Nota;Observación;Apellido1 Apellido2, Nombre` (recomendado: el nombre sólo se utiliza para verificar si hay un error).
 - `Nota;Observación`
 - `Nota`
 - `Observación`
