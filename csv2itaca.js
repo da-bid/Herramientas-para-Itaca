@@ -1,6 +1,6 @@
 /**
  * Nombre del programa: csv2itaca
- * Versión: 2.0.0
+ * Versión: 2.1.0
  * Autor: David Palazón.
  * Repositorio: https://github.com/da-bid/csv2itaca
  * 
@@ -37,24 +37,51 @@ for (let i = 1; i <= b.length; i++) {
 return (1 - (matrix[b.length][a.length] / Math.max(text1.length, text2.length)))*100
 }
 
+function  _camelCase(t){return t.split(" ").map(e=> e.charAt(0).toUpperCase() + e.slice(1)).join(" ");}
 
 function unidecode(t) {
   const unicodeToAscii = {"á":"a","é":"e","í":"i","ó":"o","ú":"u","ý":"y","à":"a","è":"e","ì":"i","ò":"o","ù":"u","â":"a","ê":"e","î":"i","ô":"o","û":"u","ã":"a","õ":"o","ñ":"n","ä":"a","ë":"e","ï":"i","ö":"o","ü":"u","ÿ":"y","å":"a","æ":"ae","œ":"oe","ç":"c","ð":"d","ø":"o","ł":"l","š":"s","ž":"z","č":"c","ć":"c","đ":"d","ř":"r","ť":"t","ň":"n","ď":"d","ľ":"l","ş":"s","ğ":"g","ą":"a","ę":"e","ė":"e","į":"i","ų":"u","ǎ":"a","ě":"e","ǐ":"i","ǒ":"o","ǔ":"u","ǖ":"u","ǘ":"u","ǚ":"u","ǜ":"u","ǹ":"n","ǻ":"a","ǽ":"ae","ǿ":"o","ȁ":"a","ȅ":"e","ȉ":"i","ȍ":"o","ȕ":"u","ȧ":"a","ȩ":"e","ȫ":"o","ȭ":"o","ȯ":"o","ȱ":"o","ȳ":"y","ḃ":"b","ḋ":"d","ḟ":"f","ṁ":"m","ṗ":"p","ṡ":"s","ṫ":"t","ẁ":"w","ẃ":"w","ẅ":"w","ẇ":"w","ẋ":"x","ẍ":"x","ẏ":"y","ẑ":"z","ẓ":"z","ạ":"a","ả":"a","ấ":"a","ầ":"a","ẩ":"a","ẫ":"a","ậ":"a","ắ":"a","ằ":"a","ẳ":"a","ẵ":"a","ặ":"a","ẹ":"e","ẻ":"e","ẽ":"e","ế":"e","ề":"e","ể":"e","ễ":"e","ệ":"e","ỉ":"i","ị":"i","ọ":"o","ỏ":"o","ố":"o","ồ":"o","ổ":"o","ỗ":"o","ộ":"o","ớ":"o","ờ":"o","ở":"o","ỡ":"o","ợ":"o","ụ":"u","ủ":"u","ứ":"u","ừ":"u","ử":"u","ữ":"u","ự":"u","ỳ":"y","ỵ":"y","ỷ":"y","ỹ":"y"};
-  return String(t).split('').map(char => unicodeToAscii[char] || char).join('')}
+  return String(t).split('').map(char => unicodeToAscii[char] || char).filter(char => char.charCodeAt(0) < 128).join('');}
+
+  function _getAlumnos(){
+    /*Si ya existe no crea un nodo, si no que lo reutiliza*/
+    let newList = document.getElementById("listadoalumnos")
+
+    if (newList===null){
+      let nombArr=Array.from(document.querySelectorAll("div.imc-nom"));
+    
+      nombArr=nombArr.map(e => e.querySelector("p").textContent.split(" (")[0]);
+      nombArr = nombArr.map(e => _camelCase(e));
+
+      const placeList=document.querySelector("section.imc-seccio-avaluacio").querySelector("div.imc-seccio-contenidor")
+      newList=document.createElement("div");
+      newList.id="listadoalumnos"
+      newList.style="background: hsla(195, 79.9%, 48.8%);"
+      placeList.prepend(newList);
+      newList.innerHTML="<ol><li>"+nombArr.join("</li><li>")+"</li></ol>"
+    } else {
+      newList.remove()
+    }
+
+    
+  }
+function _createmenu(){
+  if (!document.getElementById('menunotas')){
+    let container = document.createElement("div");
+    container.style="background: hsla(195, 79.9%, 48.8%);"
+    container.id="menunotas"
+    container.innerHTML = `<p>Sube un archivo CSV con las notas: <input type="file" id="csvFileInput" accept=".csv"> List alumnos <button id="getalumnosbutton">Listado de alumnos</button></p>`;
+    element = querySelectorByXPath('//section[@id="imc-seccio-avaluacio"]/div/div[@class="imc-contingut-carregat"]');
+    header = element.querySelector("header");
+    header.appendChild(container);
+  }
+}
 
 /*Si no hay menú lo creamos.*/
-if (!document.getElementById("csvFileInput")){
-  /*Buscamos el header*/
-  element = querySelectorByXPath('//section[@id="imc-seccio-avaluacio"]/div/div[@class="imc-contingut-carregat"]');
-  header = element.querySelector("header");
+_createmenu()
 
-  /* Agregar botón de cargar CSV */
-  container = document.createElement("div");
-  container.style="background: hsla(195, 79.9%, 48.8%);"
-  container.id="csvnotasloader"
-  container.innerHTML = `<p>Sube un archivo CSV con las notas: <input type="file" id="csvFileInput" accept=".csv"></p>`;
-  header.appendChild(container);
-}
+/*Listener del botón*/
+document.getElementById("getalumnosbutton").addEventListener('click', _getAlumnos)
 
 /*Leemos el CSV*/
 document.getElementById('csvFileInput').addEventListener('change', function(event) {
@@ -101,8 +128,8 @@ document.getElementById('csvFileInput').addEventListener('change', function(even
         }
       }
 
-      if (!(nTmp===null)) notasArr[i].value = nTmp;
-      if (!(oTmp===null) && oTmp.length && oTmp.length>0){
+      if (nTmp!==null) notasArr[i].value = nTmp;
+      if (oTmp!==null && oTmp.length && oTmp.length>0){
         obsArr[i].click()
         document.querySelector("textarea.imc-f-observacions-avanzada").value = oTmp.replace(/\\n/g, '\n');
         document.querySelectorAll("a.imc-bt-finalitza")[2].click();
