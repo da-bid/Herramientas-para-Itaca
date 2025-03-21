@@ -13,11 +13,15 @@ No es necesaria su instalación. Para ejecutarlo simplemente se debe de copiar e
 7. Aparecerá un botón arriba que nos pedirá un CSV.
 
 # Formato del archivo CSV
-- El formato del archivo CSV debe de ser `Nota; Observación`.
 - No debe tener cabecera con títulos.
 - Se debe utilizar `\n` para poner un salto de línea.
-- No se puede utilizar punto y coma (;).
+- No se puede utilizar punto y coma (;), salvo la necesaria para el CSV.
 
-Se puede consultar el ejemplo haciendo [click aquí.](/Ejemplo.csv)
+### Tipos de archivos aceptados
+Se aceptan los siguientes archivos (hay un ejemplo de cada uno subido [aquí](/tree/main/CSV%20Ejemplo).
+- `Nota;Observación;Apellido1 Apellido2 Nombre` (recomendado: el nombre sólo se utiliza para verificar si hay un error).
+- `Nota;Observación`
+- `Nota`
+- `Observación`
 
 
