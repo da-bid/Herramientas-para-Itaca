@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Herramientas para itaca
 // @namespace    https://github.com/da-bid/csv2itaca
-// @downloadURL  https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @updateURL    https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @version      3.2
+// @downloadURL  https://github.com/da-bid/Herramientas-para-Itaca/raw/refs/heads/main/HerramientasItaca.user.js
+// @updateURL    https://github.com/da-bid/Herramientas-para-Itaca/raw/refs/heads/main/HerramientasItaca.user.js
+// @version      3.2.1
 // @description  Añade funcionalidades para marcar mensajes como leídos y cargar notas desde CSV
 // @author       David Palazón
 // @match        https://docent.edu.gva.es/md-front/www/*
