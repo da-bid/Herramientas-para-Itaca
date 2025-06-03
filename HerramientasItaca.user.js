@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Herramientas para itaca
 // @namespace    https://github.com/da-bid/csv2itaca
-// @downloadURL  https://github.com/da-bid/Herramientas-para-Itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @updateURL    https://github.com/da-bid/Herramientas-para-Itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @version      3.2.1
+// @downloadURL  https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
+// @updateURL    https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
+// @version      3.3
 // @description  Añade funcionalidades para marcar mensajes como leídos y cargar notas desde CSV
 // @author       David Palazón
 // @match        https://docent.edu.gva.es/md-front/www/*
@@ -132,8 +132,7 @@
         let boton = document.createElement("button");
         boton.id = "marcarLeidosBtn";
         boton.innerText = "Marcar todos como leídos";
-        boton.style.display = "block";
-        boton.addEventListener("click", marcarTodosLeidos);
+        //boton.setAttribute("onclick","marcarTodosLeidos()");
         divNode.insertBefore(boton, null);
     }
 
@@ -141,13 +140,13 @@
         let mensList = document.querySelector("ul.imc-co-missatges");
         if (!mensList) return;
         let mensajes = mensList.querySelectorAll("li");
-        Array.from(mensajes).forEach(e => _marcarLeido(e.getAttribute("data-id")));
         let anterior = location.href;
+        Array.from(mensajes).forEach(e => marcarLeido(e.getAttribute("data-id")));
         location.href = "#centre";
         location.href = anterior;
     }
 
-    function _marcarLeido(id) {
+    function marcarLeido(id) {
         fetch("https://docent.edu.gva.es/md-front/comunica/putLeida", {
             headers: {
                 "accept": "application/json, text/javascript, */*; q=0.01",
@@ -193,6 +192,7 @@
         });
     }
 
+
     window.addEventListener("load", async () => {
         const menuJUS = await esperarElementoAsync("#imc-seccio-comunicacions-safata", "css");
         agregarBotonJUS(menuJUS);
@@ -203,7 +203,8 @@
         observarURL();
     });
 
-    // Listeners del menú CSV (en cuanto se cree)
+    // Listeners los botones
+
     document.addEventListener("change", event => volcarNotas(event));
 
     document.addEventListener("click", function (event) {
@@ -212,6 +213,9 @@
         }
         if (event.target && event.target.id === "btimportcsv"){
             document.getElementById("csvFileInput").click();
+        }
+        if (event.target && event.target.id === "marcarLeidosBtn"){
+            marcarTodosLeidos()
         }
     });
 })();
