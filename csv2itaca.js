@@ -1,6 +1,6 @@
 /**
  * Nombre del programa: csv2itaca
- * Versión: 2.1.0
+ * Versión: 2.2.0
  * Autor: David Palazón.
  * Repositorio: https://github.com/da-bid/csv2itaca
  * 
@@ -99,6 +99,7 @@ document.getElementById('csvFileInput').addEventListener('change', function(even
     document.getElementById('csvFileInput').value=null;
     
     /* Capturamos los botones*/
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
     const notasArr = document.querySelectorAll("input.imc-f-qu-camp");
     const obsArr = document.querySelectorAll("a.imc-bt-observacions");
     const nombArr=document.querySelectorAll("div.imc-nom");
@@ -128,7 +129,12 @@ document.getElementById('csvFileInput').addEventListener('change', function(even
         }
       }
 
-      if (nTmp!==null) notasArr[i].value = nTmp;
+      if (nTmp !== null) {
+        //notasArr[i].value = nTmp;
+        nativeInputValueSetter.call(notasArr[i], nTmp);
+        notasArr[i].dispatchEvent(new Event('input', { bubbles: true }));
+        notasArr[i].dispatchEvent(new Event('change', { bubbles: true }));
+      }
       if (oTmp!==null && oTmp.length && oTmp.length>0){
         obsArr[i].click()
         document.querySelector("textarea.imc-f-observacions-avanzada").value = oTmp.replace(/\\n/g, '\n');

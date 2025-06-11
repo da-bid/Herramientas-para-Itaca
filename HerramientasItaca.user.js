@@ -3,7 +3,7 @@
 // @namespace    https://github.com/da-bid/csv2itaca
 // @downloadURL  https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
 // @updateURL    https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @version      3.3
+// @version      3.4
 // @description  Añade funcionalidades para marcar mensajes como leídos y cargar notas desde CSV
 // @author       David Palazón
 // @match        https://docent.edu.gva.es/md-front/www/*
@@ -75,6 +75,7 @@
                 const notasArr = document.querySelectorAll("input.imc-f-qu-camp");
                 const obsArr = document.querySelectorAll("a.imc-bt-observacions");
                 const nombArr = document.querySelectorAll("div.imc-nom");
+                const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
 
                 for (let i = 0; i < data.length && i < obsArr.length; i++) {
                     let nTmp = null;
@@ -99,7 +100,12 @@
                         }
                     }
 
-                    if (nTmp !== null) notasArr[i].value = nTmp;
+                    if (nTmp !== null) {
+                        //notasArr[i].value = nTmp;
+                        nativeInputValueSetter.call(notasArr[i], nTmp);
+                        notasArr[i].dispatchEvent(new Event('input', { bubbles: true }));
+                        notasArr[i].dispatchEvent(new Event('change', { bubbles: true }));
+                    }
                     if (oTmp !== null && oTmp.length > 0) {
                         obsArr[i].click();
                         document.querySelector("textarea.imc-f-observacions-avanzada").value = oTmp.replace(/\\n/g, '\n');
