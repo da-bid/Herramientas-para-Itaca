@@ -3,7 +3,7 @@
 // @namespace    https://github.com/da-bid/csv2itaca
 // @downloadURL  https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
 // @updateURL    https://github.com/da-bid/csv2itaca/raw/refs/heads/main/HerramientasItaca.user.js
-// @version      3.4
+// @version      3.5
 // @description  Añade funcionalidades para marcar mensajes como leídos y cargar notas desde CSV
 // @author       David Palazón
 // @match        https://docent.edu.gva.es/md-front/www/*
@@ -150,6 +150,7 @@
         Array.from(mensajes).forEach(e => marcarLeido(e.getAttribute("data-id")));
         location.href = "#centre";
         location.href = anterior;
+        document.querySelector(".imc-modul-co-de-tu").querySelector(".imc-bt-tanca").click();
     }
 
     function marcarLeido(id) {
