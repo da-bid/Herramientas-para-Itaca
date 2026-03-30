@@ -8,11 +8,16 @@ Este programa es una herramienta para facilitar la transferencia automática de 
 
 1. Instalar una extensión compatible con scripts de usuario, como Tampermonkey, Greasemonkey, UserScripts u otra similar.
 
-   - [GreaseMonkey](https://addons.mozilla.org/es-ES/firefox/addon/greasemonkey/) para Firefox  
+   - [GreaseMonkey](https://addons.mozilla.org/es-ES/firefox/addon/greasemonkey/) para Firefox *(Recomendado)*
    - [Tampermonkey](https://www.tampermonkey.net/index.php?browser=chrome&locale=es) para Chrome, Edge, Opera...  
    - [UserScripts](https://apps.apple.com/us/app/userscripts/id1463298887) para Safari
 
 2. Instalar el script [Herramientas para Ítaca](/HerramientasItaca.user.js?raw=1))
+
+3. Para GreaseMonkey en Firefox no es necesario dar permisos pero para el resto probablemente sí. Estos permisos pueden ser encontrados en Chrome, y en el resto de navegadores de forma similar, así:
+3.1. Acceder a chrome://extensions/
+3.2. Clickar "Detalles" en Tampermonkey
+3.3. En la opción "Permitir que esta extensión lea y cambie todos los datos de los sitios web que visites:" marcar "En todos los sitios".
 
 ---
 
